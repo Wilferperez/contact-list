@@ -23,6 +23,9 @@ const button = document.getElementById("button");
 function cleanForm() {
   formulario.elements["name"].value = "";
   formulario.elements["lastname"].value = "";
+  formulario.elements["phone"].value = "";
+  formulario.elements["city"].value = "";
+  formulario.elements["address"].value = "";
 
   document.getElementById("female").checked = false;
   document.getElementById("male").checked = false;
@@ -43,14 +46,18 @@ function loadListContact(contacts) {
 }
 
 loadListContact(contacts);
+
 //  escuchar evento submit
 formulario.addEventListener("submit", (event) => {
   event.preventDefault();
   const name = formulario.elements["name"].value;
   const lastname = formulario.elements["lastname"].value;
   const sex = formulario.elements["sex"].value;
+  const phone = formulario.elements["phone"].value;
+  const city = formulario.elements["city"].value;
+  const address = formulario.elements["address"].value;
 
-  const emptyInput = checkEmptyInput(name, lastname, sex);
+  const emptyInput = checkEmptyInput(name, lastname, sex, phone, city, address);
   if (emptyInput) {
     alert("Please complete all the inputs.");
   } else {
@@ -65,12 +72,15 @@ formulario.addEventListener("submit", (event) => {
       name,
       lastname,
       sex,
+      phone,
+      city,
+      address,
     };
 
     if (button.value === "ADD") {
       addcontact(contact);
     } else {
-      updateContact(name, lastname, sex);
+      updateContact(name, lastname, sex, phone, city, address);
     }
   }
 });
@@ -100,11 +110,14 @@ let deleteContact = (id) => {
   listContact.removeChild(contactDeleted);
 };
 
-let updateContact = (name, lastname, sex) => {
+let updateContact = (name, lastname, sex, phone, city, address) => {
   console.log(button.id);
   contacts[button.id].name = name;
   contacts[button.id].lastname = lastname;
   contacts[button.id].sex = sex;
+  contacts[button.id].phone = phone;
+  contacts[button.id].city = city;
+  contacts[button.id].address = address;
 
   window.localStorage.setItem("contacts", JSON.stringify(contacts));
 
@@ -114,7 +127,7 @@ let updateContact = (name, lastname, sex) => {
   cleanForm();
 };
 //
-let loadContact = (id) => {
+let loadContactForm = (id) => {
   console.log(id);
   const index = contacts.findIndex((contact) => {
     return contact.id === id;
@@ -130,9 +143,15 @@ let loadContact = (id) => {
   const lastname = document.getElementById("lastname");
   const female = document.getElementById("female");
   const male = document.getElementById("male");
+  const phone = document.getElementById("phone");
+  const city = document.getElementById("city");
+  const address = document.getElementById("address");
 
   name.value = contact.name;
   lastname.value = contact.lastname;
+  phone.value = contact.phone;
+  city.value = contact.city;
+  address.value = contact.address;
   if (contact.sex === "male") {
     male.checked = true;
   } else {
@@ -141,8 +160,8 @@ let loadContact = (id) => {
 };
 
 // validar input vacios
-function checkEmptyInput(name, lastname, sex) {
-  if (name === "" || lastname === "" || sex === "") {
+function checkEmptyInput(name, lastname, sex, phone, city, address) {
+  if (name === "" || lastname === "" || sex === "" ||  phone === "" || city === "" || address === "" ) {
     return true;
   }
   return false;
@@ -159,7 +178,7 @@ function renderContact(contact) {
     height="15px"
     onClick="showSpinner()"
   />
-  <span>${contact.name} ${contact.lastname}</span>
+  <span>${contact.name} ${contact.lastname} - ${contact.city}</span>
 </label>
 <label>
 <img
@@ -168,7 +187,7 @@ function renderContact(contact) {
   class="closeBtn"
   width="15px"
   height="15px"
-  onClick="loadContact(${contact.id})"
+  onClick="loadContactForm(${contact.id})"
 />
 <img
   src="./img/basura.png"
