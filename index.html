@@ -1,26 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
     <title>Document</title>
-</head>
-<body>
-
-    <div id="divlogo">
+  </head>
+  <body>
+    <div class="container">
+      <div id="loading" class="loading" onClick="hideSpinner()">
+        Loading&#8230;
+      </div>
+      <div id="divlogo">
         <img src="./img/comunicar.png" alt="logo" class="logo" />
       </div>
-    <h1>Lista de contactos</h1>
+      <h1>Contact List</h1>
 
-    <div class="lista contactos">
-        <input type="text" placeholder="escriba aqui su nombre..." autofocus>
-        <input type="text" placeholder="escriba aqui su nucmero..." autofocus>
-        <input type="text" placeholder="escriba aqui su id..." autofocus>
-        <input type="submit" value="+" id="addBtn">
+      <!-- formulario -->
+
+      <form action="#" id="formulario">
+        <div class="mb-3">
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Input your name"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="lastname"
+              placeholder="Input your lastname"
+            />
+          </div>
+          <div class="mb-3">
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="sex"
+                id="female"
+                value="female"
+              />
+              <label class="form-check-label" for="inlineRadio1">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="sex"
+                id="male"
+                value="male"
+              />
+              <label class="form-check-label" for="inlineRadio2">Male</label>
+            </div>
+          </div>
+
+          <div class="d-grid gap-2 d-md-block">
+            <input
+              class="btn btn-primary"
+              type="submit"
+              value="ADD"
+              id="button"
+            />
+          </div>
+        </div>
+      </form>
+      <!-- contenedor de contactos -->
+      <div id="listContact" class="mb-3">
+        
+      </div>
     </div>
 
-    
     <script src="./main.js"></script>
-</body>
+  </body>
 </html>
