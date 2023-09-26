@@ -110,6 +110,7 @@ let deleteContact = (id) => {
   listContact.removeChild(contactDeleted);
 };
 
+//funcion para permitir atualizar un contacto
 let updateContact = (name, lastname, sex, phone, city, address) => {
   console.log(button.id);
   contacts[button.id].name = name;
